@@ -1,6 +1,6 @@
 name := "docker-core"
 
-version := "0.0.002"
+version := "0.0.003"
 
 scalaVersion := "2.13.7"
 
