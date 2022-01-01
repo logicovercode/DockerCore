@@ -59,7 +59,9 @@ case class HostConfig(
     capabilities : Option[Seq[Capability]] = None
 )
 
-case class ContainerDefinition(image: String,
+case class ContainerDefinition(mayBeHubUser: Option[String],
+                               image : String,
+                               tag : String,
                                name: Option[String] = None,
                                command: Option[Seq[String]] = None,
                                entrypoint: Option[Seq[String]] = None,
@@ -78,6 +80,11 @@ case class ContainerDefinition(image: String,
                                hostConfig: Option[HostConfig] = None,
                                ip : Option[ContainerIp] = None,
                                extraHosts : Seq[String] = Seq.empty) {
+
+  def dockerImageUri() : String = {
+    val imageWithTag = mayBeHubUser.map(_ + "/").getOrElse("") + image + ":" + tag
+    imageWithTag
+  }
 
   def withCommand(cmd: String*) = copy(command = Some(cmd))
 

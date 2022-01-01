@@ -1,6 +1,6 @@
 name := "docker-core"
 
-version := "0.0.002"
+version := "0.0.003"
 
 scalaVersion := "2.13.7"
 
@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.10" % Test
 )
 
-val projectSourceDirs = List("core", "impl-docker-java")
+val projectSourceDirs = List("core", "impl-docker-java", "default-api")
 Compile / unmanagedSourceDirectories ++= projectSourceDirs.map(dir => (Compile / baseDirectory).value / dir)
 
 organization := "com.logicovercode"
@@ -39,8 +39,12 @@ licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
 
 //publishing related settings
 
+crossPaths := false
+publishMavenStyle := true
 publishTo := Some(Opts.resolver.sonatypeStaging)
 
 //below is not yet working as expected (exploring ...)
 publishConfiguration := publishConfiguration.value.withOverwrite(true)
 publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
+
+val dockerCoreProject = project in file(".")

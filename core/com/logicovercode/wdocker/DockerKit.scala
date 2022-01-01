@@ -41,7 +41,12 @@ trait DockerKit {
   }
 
   def startAllOrFail(): Unit = {
-    Await.result(containerManager.pullImages(), PullImagesTimeout)
+    //this pull timeout is for all images to get downloaded,
+    //but we want individual time out for different image
+    //so we have a separate timeout logic and commenting this timeout logic
+
+    //Await.result(containerManager.pullImages(), PullImagesTimeout)
+
     val allRunning: Boolean = try {
       val future: Future[Boolean] =
         containerManager.initReadyAll(StartContainersTimeout).map(_.map(_._2).forall(identity))
@@ -68,5 +73,4 @@ trait DockerKit {
         log.error(e.getMessage, e)
     }
   }
-
 }
