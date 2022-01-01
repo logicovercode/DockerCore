@@ -28,7 +28,12 @@ class DockerContainerManager(containers: Seq[ContainerDefinition], executor: Doc
 
   def pullImages(): Future[Seq[String]] = {
     executor.listImages().flatMap { images =>
-      val imagesToPull: Seq[String] = containers.map(_.image).filterNot { image =>
+      val dockerImages = containers.map{ container =>
+        import container._
+        val imageWithTag = mayBeHubUser.map(_ + "/").getOrElse("") + image + ":" + tag
+        imageWithTag
+      }
+      val imagesToPull: Seq[String] = dockerImages.filterNot { image =>
         val cImage = if (image.contains(":")) image else image + ":latest"
         images(cImage)
       }
