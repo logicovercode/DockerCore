@@ -39,6 +39,8 @@ licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
 
 //publishing related settings
 
+crossPaths := false
+publishMavenStyle := true
 publishTo := Some(Opts.resolver.sonatypeStaging)
 
 //below is not yet working as expected (exploring ...)
