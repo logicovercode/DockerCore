@@ -1,6 +1,6 @@
 name := "docker-core"
 
-version := "0.0.003"
+version := "0.0.004"
 
 scalaVersion := "2.13.7"
 
@@ -39,8 +39,8 @@ licenses += ("MIT", url("https://opensource.org/licenses/MIT"))
 
 //publishing related settings
 
-crossPaths := false
-publishMavenStyle := true
+//crossPaths := false
+//publishMavenStyle := true
 publishTo := Some(Opts.resolver.sonatypeStaging)
 
 //below is not yet working as expected (exploring ...)
