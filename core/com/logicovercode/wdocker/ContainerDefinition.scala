@@ -59,7 +59,9 @@ case class HostConfig(
     capabilities : Option[Seq[Capability]] = None
 )
 
-case class ContainerDefinition(image: String,
+case class ContainerDefinition(mayBeHubUser: Option[String],
+                               image : String,
+                               tag : String,
                                name: Option[String] = None,
                                command: Option[Seq[String]] = None,
                                entrypoint: Option[Seq[String]] = None,

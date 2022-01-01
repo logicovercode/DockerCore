@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.10" % Test
 )
 
-val projectSourceDirs = List("core", "impl-docker-java")
+val projectSourceDirs = List("core", "impl-docker-java", "default-api")
 Compile / unmanagedSourceDirectories ++= projectSourceDirs.map(dir => (Compile / baseDirectory).value / dir)
 
 organization := "com.logicovercode"
@@ -44,3 +44,5 @@ publishTo := Some(Opts.resolver.sonatypeStaging)
 //below is not yet working as expected (exploring ...)
 publishConfiguration := publishConfiguration.value.withOverwrite(true)
 publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
+
+val dockerCoreProject = project in file(".")

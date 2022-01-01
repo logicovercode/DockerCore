@@ -1,4 +1,4 @@
-package com.logicovercode.wdocker
+package com.logicovercode.wdocker.api
 
 import com.logicovercode.wdocker.OsFunctions.isWindowsCategoryOs
 
@@ -26,9 +26,9 @@ object DockerProcessFunctions {
   }
 
   def killDockerManager(
-                         sbtProcessId: Long,
-                         osNameOption: Option[String]
-                       ): Unit = {
+      sbtProcessId: Long,
+      osNameOption: Option[String]
+  ): Unit = {
     val msg =
       s"attempt to silent process(that is starting docker services) with pid  >$sbtProcessId< on ${osNameOption.get}"
 
