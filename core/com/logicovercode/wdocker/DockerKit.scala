@@ -41,7 +41,7 @@ trait DockerKit {
   }
 
   def startAllOrFail(): Unit = {
-    //Await.result(containerManager.pullImages(), PullImagesTimeout)
+    Await.result(containerManager.pullImages(), PullImagesTimeout)
     val allRunning: Boolean = try {
       val future: Future[Boolean] =
         containerManager.initReadyAll(StartContainersTimeout).map(_.map(_._2).forall(identity))

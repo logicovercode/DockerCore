@@ -81,6 +81,11 @@ case class ContainerDefinition(mayBeHubUser: Option[String],
                                ip : Option[ContainerIp] = None,
                                extraHosts : Seq[String] = Seq.empty) {
 
+  def dockerImageUri() : String = {
+    val imageWithTag = mayBeHubUser.map(_ + "/").getOrElse("") + image + ":" + tag
+    imageWithTag
+  }
+
   def withCommand(cmd: String*) = copy(command = Some(cmd))
 
   def withEntrypoint(entrypoint: String*) = copy(entrypoint = Some(entrypoint))

@@ -49,7 +49,7 @@ class DockerJavaExecutor(override val host: String, client: DockerClient)
       }
 
     val cmd = client
-      .createContainerCmd(spec.image)
+      .createContainerCmd(spec.dockerImageUri())
       .withHostConfig(hostConfig)
       .withPortSpecs(spec.bindPorts
         .map({
