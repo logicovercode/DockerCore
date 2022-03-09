@@ -167,6 +167,13 @@ object DockerSystem {
       imagePullTimeout.toSeconds
     )(dockerClient)
 
+    startContainerDefinition(containerDefinition, imagePullTimeout, startTimeout)
+  }
+
+  def startContainerDefinition(containerDefinition: ContainerDefinition,
+                               imagePullTimeout: FiniteDuration,
+                               startTimeout: FiniteDuration)(implicit dockerClient: DockerClient, dockerFactory: DockerFactory): Try[Unit] = Try {
+
     case class ContainerKit(containerDefinition: ContainerDefinition, imagePullTimeout : FiniteDuration,
                             containerStartTimeout : FiniteDuration, _dockerFactory: DockerFactory) extends DockerKit{
 

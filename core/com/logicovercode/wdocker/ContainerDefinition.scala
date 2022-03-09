@@ -59,10 +59,10 @@ case class HostConfig(
     capabilities : Option[Seq[Capability]] = None
 )
 
-case class ContainerDefinition(mayBeHubUser: Option[String],
-                               image : String,
+case class ContainerDefinition(image : String,
                                tag : String,
                                name: Option[String] = None,
+                               mayBeHubUser: Option[String] = None,
                                command: Option[Seq[String]] = None,
                                entrypoint: Option[Seq[String]] = None,
                                bindPorts: Map[Int, DockerPortMapping] = Map.empty,
@@ -90,8 +90,11 @@ case class ContainerDefinition(mayBeHubUser: Option[String],
 
   def withEntrypoint(entrypoint: String*) = copy(entrypoint = Some(entrypoint))
 
-  def withPorts(ps: (Int, Option[Int])*) =
-    copy(bindPorts = ps.map { case (internalPort, hostPort) => internalPort -> DockerPortMapping(hostPort) }.toMap)
+  def withPorts(ps: (Int, Int)*) =
+    copy(bindPorts = ps.map { case (internalPort, hostPort) => internalPort -> DockerPortMapping(Option(hostPort)) }.toMap)
+
+//  def withPorts(ps: (Int, Option[Int])*) =
+//    copy(bindPorts = ps.map { case (internalPort, hostPort) => internalPort -> DockerPortMapping(hostPort) }.toMap)
 
   def withPortMapping(ps: (Int, DockerPortMapping)*) = copy(bindPorts = ps.toMap)
   def withLinks(links: ContainerLink*) = copy(links = links.toSeq)
