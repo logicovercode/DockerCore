@@ -110,7 +110,7 @@ case class ContainerDefinition(image : String,
 
   def withNetworkMode(networkMode: DockerNetwork) = copy(networkMode = Some(networkMode))
 
-  def withVolumes(volumeMappings: Seq[VolumeMapping]) = copy(volumeMappings = volumeMappings)
+  def withVolumes(volumeMappings: VolumeMapping*) = copy(volumeMappings = volumeMappings)
 
   def withLogLineReceiver(logLineReceiver: LogLineReceiver) =
     copy(logLineReceiver = Some(logLineReceiver))
